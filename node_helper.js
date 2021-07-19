@@ -73,14 +73,18 @@ module.exports = NodeHelper.create({
                 sonos.currentTrack(),
                 sonos.getCurrentState(),
                 sonos.getVolume(),
-                sonos.getMuted()
+                sonos.getMuted(),
+		sonos.getMediaInfo()
             ]).then(data => {
+	        console.log(`${group.Name} - ${group.host} Got media info: ${JSON.stringify(data[4])}`)
+	        console.log(`${group.Name} - ${group.host} CurrentURIMetadata: ${data[4].CurrentURIMetaData}`)
                 return {
                     group,
                     track: data[0],
                     state: data[1],
                     volume: data[2],
                     isMuted: data[3],
+		    mediaInfo: data[4],
                 };
             });
         })).then(items => {

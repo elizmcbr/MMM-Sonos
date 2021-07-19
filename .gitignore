@@ -41,7 +41,7 @@ build/Release
 
 # Dependency directories
 node_modules/
-!node/modules/sonos/ ## since I am updating the underlying sonos library
+!node_modules/sonos/ ## since I am updating the underlying sonos library
 jspm_packages/
 
 # TypeScript v1 declaration files

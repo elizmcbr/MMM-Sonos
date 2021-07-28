@@ -90,13 +90,19 @@ Module.register('MMM-Sonos', {
         const container = document.createElement('div');
         container.className = 'sonos light';
         container.append(...Object.values(this.items)
-            .filter(item => item.state === 'playing' && item.track)
+            .filter(item => item.state === 'playing' && (item.track || item.uriMetadata))
             .map(item => {
                 const container = document.createElement('div');
 
                 const track = document.createElement('div');
                 track.className = 'track';
-                track.innerHTML  = `<strong class="bright ticker">${item.track.title}</strong>`;
+		// Set the title based on the track. If there is none, we
+		// try to fetch the title from the URI metadata.
+		var title = item.track.title
+		if (!title) {
+		  title = item.uriMetadata.title;
+		}
+                track.innerHTML  = `<strong class="bright ticker">${title}</strong>`;
                 container.append(track);
 
                 const artist = [];
